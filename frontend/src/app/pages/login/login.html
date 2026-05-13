@@ -1,0 +1,61 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>School Grades</h1>
+
+    @if (isRegisterMode) {
+      <p>Crear una cuenta nueva</p>
+    } @else {
+      <p>Iniciar sesión</p>
+    }
+
+    <form (ngSubmit)="submitForm()">
+      @if (isRegisterMode) {
+        <input
+          type="text"
+          name="name"
+          placeholder="Nombre completo"
+          [(ngModel)]="name"
+          required
+        >
+      }
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Correo"
+        [(ngModel)]="email"
+        required
+      >
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Contraseña"
+        [(ngModel)]="password"
+        required
+      >
+
+      @if (isRegisterMode) {
+        <button type="submit">Registrarme</button>
+      } @else {
+        <button type="submit">Ingresar</button>
+      }
+    </form>
+
+    @if (errorMessage) {
+      <p class="error">{{ errorMessage }}</p>
+    }
+
+    @if (successMessage) {
+      <p class="success">{{ successMessage }}</p>
+    }
+
+    <button class="secondary-button" type="button" (click)="changeMode()">
+      @if (isRegisterMode) {
+        Ya tengo cuenta
+      } @else {
+        No tengo cuenta, registrarme
+      }
+    </button>
+  </div>
+</div>

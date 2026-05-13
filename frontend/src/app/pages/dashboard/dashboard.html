@@ -1,0 +1,32 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <div>
+      <h1>Panel principal</h1>
+      <p>Resumen general del sistema escolar</p>
+    </div>
+
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+  </header>
+
+  <section class="stats-grid">
+    <div class="stat-card">
+      <h2>{{ totalStudents }}</h2>
+      <p>Estudiantes registrados</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ totalGrades }}</h2>
+      <p>Notas registradas</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ averageScore }}</h2>
+      <p>Promedio general</p>
+    </div>
+  </section>
+
+  <section class="actions">
+    <button (click)="goToStudents()">Gestionar estudiantes</button>
+    <button (click)="goToGrades()">Gestionar notas</button>
+  </section>
+</div>

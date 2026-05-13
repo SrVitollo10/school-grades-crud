@@ -1,0 +1,102 @@
+<div class="page-container">
+  <header class="header">
+    <div>
+      <h1>Estudiantes</h1>
+      <p>Registrar y consultar estudiantes</p>
+    </div>
+
+    <div class="header-actions">
+      <button (click)="goToDashboard()">Dashboard</button>
+      <button (click)="goToGrades()">Notas</button>
+    </div>
+  </header>
+
+  <section class="form-card">
+    <h2>Nuevo estudiante</h2>
+
+    <form (ngSubmit)="createStudent()">
+      <input
+        type="text"
+        name="name"
+        placeholder="Nombre"
+        [(ngModel)]="name"
+        required
+      >
+
+      <input
+        type="text"
+        name="lastName"
+        placeholder="Apellido"
+        [(ngModel)]="lastName"
+        required
+      >
+
+      <input
+        type="number"
+        name="age"
+        placeholder="Edad"
+        [(ngModel)]="age"
+        required
+      >
+
+      <input
+        type="text"
+        name="gradeLevel"
+        placeholder="Grado"
+        [(ngModel)]="gradeLevel"
+        required
+      >
+
+      <input
+        type="text"
+        name="group"
+        placeholder="Grupo"
+        [(ngModel)]="group"
+        required
+      >
+
+      <button type="submit">Guardar estudiante</button>
+    </form>
+
+    @if (message) {
+      <p class="message">{{ message }}</p>
+    }
+  </section>
+
+  <section class="list-card">
+    <h2>Lista de estudiantes</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Edad</th>
+          <th>Grado</th>
+          <th>Grupo</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (student of students; track student._id) {
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.gradeLevel }}</td>
+            <td>{{ student.group }}</td>
+            <td>
+              <button
+                class="delete-btn"
+                (click)="deleteStudent(student._id)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</div>

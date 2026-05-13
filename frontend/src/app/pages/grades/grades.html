@@ -1,0 +1,117 @@
+<div class="page-container">
+  <header class="header">
+    <div>
+      <h1>Notas</h1>
+      <p>Registrar y consultar notas escolares</p>
+    </div>
+
+    <div class="header-actions">
+      <button (click)="goToDashboard()">Dashboard</button>
+      <button (click)="goToStudents()">Estudiantes</button>
+    </div>
+  </header>
+
+  <section class="form-card">
+    <h2>Nueva nota</h2>
+
+    <form (ngSubmit)="createGrade()">
+      <select name="student" [(ngModel)]="student" required>
+        <option value="">Selecciona un estudiante</option>
+
+        @for (studentItem of students; track studentItem._id) {
+          <option [value]="studentItem._id">
+            {{ studentItem.name }}
+            {{ studentItem.lastName }}
+            -
+            {{ studentItem.gradeLevel }}{{ studentItem.group }}
+          </option>
+        }
+      </select>
+
+      <input
+        type="text"
+        name="subject"
+        placeholder="Materia"
+        [(ngModel)]="subject"
+        required
+      >
+
+      <input
+        type="number"
+        name="score"
+        placeholder="Nota 0 - 5"
+        [(ngModel)]="score"
+        min="0"
+        max="5"
+        required
+      >
+
+      <input
+        type="text"
+        name="period"
+        placeholder="Periodo"
+        [(ngModel)]="period"
+        required
+      >
+
+      <input
+        type="text"
+        name="teacher"
+        placeholder="Profesor"
+        [(ngModel)]="teacher"
+        required
+      >
+
+      <button type="submit">Guardar nota</button>
+    </form>
+
+    @if (message) {
+      <p class="message">{{ message }}</p>
+    }
+  </section>
+
+  <section class="list-card">
+    <h2>Lista de notas</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Materia</th>
+          <th>Nota</th>
+          <th>Periodo</th>
+          <th>Profesor</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (grade of grades; track grade._id) {
+          <tr>
+            <td>
+              {{ grade.student?.name }}
+              {{ grade.student?.lastName }}
+            </td>
+
+            <td>{{ grade.subject }}</td>
+
+            <td>{{ grade.score }}</td>
+
+            <td>{{ grade.period }}</td>
+
+            <td>{{ grade.teacher }}</td>
+
+            <td>
+              <button
+                class="delete-btn"
+                (click)="deleteGrade(grade._id)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</div>
